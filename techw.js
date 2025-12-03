@@ -1,4 +1,4 @@
-// Chat Widget Script - Enhanced Modern Design
+// Chat Widget Script - Enhanced Modern Design with Loading Animation
 (function() {
     // Create and inject styles
     const styles = `
@@ -7,7 +7,7 @@
             --chat--color-secondary: var(--n8n-chat-secondary-color, #8b5cf6);
             --chat--color-background: var(--n8n-chat-background-color, #ffffff);
             --chat--color-font: var(--n8n-chat-font-color, #1f2937);
-            font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         .n8n-chat-widget .chat-container {
@@ -16,21 +16,24 @@
             right: 30px;
             z-index: 1000;
             display: none;
-            width: 400px;
-            height: 600px;
+            width: 420px;
+            height: 640px;
             background: var(--chat--color-background);
-            border-radius: 24px;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.06);
+            border-radius: 28px;
+            box-shadow: 
+                0 0 0 1px rgba(0, 0, 0, 0.04),
+                0 8px 16px rgba(0, 0, 0, 0.04),
+                0 16px 32px rgba(0, 0, 0, 0.08),
+                0 32px 64px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             font-family: inherit;
-            animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(20px);
+            animation: slideUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px) scale(0.95);
+                transform: translateY(40px) scale(0.94);
             }
             to {
                 opacity: 1;
@@ -49,115 +52,116 @@
         }
 
         .n8n-chat-widget .brand-header {
-            padding: 20px 24px;
+            padding: 24px 28px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             position: relative;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .n8n-chat-widget .close-button {
             position: absolute;
-            right: 16px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.18);
             border: none;
             color: white;
             cursor: pointer;
-            padding: 6px;
+            padding: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            font-size: 20px;
-            opacity: 0.9;
-            border-radius: 10px;
-            width: 32px;
-            height: 32px;
-            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            font-size: 22px;
+            opacity: 0.85;
+            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            backdrop-filter: blur(12px);
+            font-weight: 300;
         }
 
         .n8n-chat-widget .close-button:hover {
             opacity: 1;
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-50%) rotate(90deg);
+            background: rgba(255, 255, 255, 0.28);
+            transform: translateY(-50%) rotate(90deg) scale(1.05);
         }
 
         .n8n-chat-widget .brand-header img {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
             object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+            border: 2.5px solid rgba(255, 255, 255, 0.25);
         }
 
         .n8n-chat-widget .brand-info {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 4px;
         }
 
         .n8n-chat-widget .brand-header span {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 600;
             color: white;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.4px;
         }
 
         .n8n-chat-widget .brand-status {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.88);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
         }
 
         .n8n-chat-widget .brand-status::before {
             content: '';
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             background: #4ade80;
             border-radius: 50%;
             display: inline-block;
-            animation: pulse 2s ease-in-out infinite;
-            box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+            animation: statusPulse 2.5s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
         }
 
-        @keyframes pulse {
+        @keyframes statusPulse {
             0%, 100% {
                 opacity: 1;
                 transform: scale(1);
             }
             50% {
-                opacity: 0.7;
-                transform: scale(0.95);
+                opacity: 0.6;
+                transform: scale(0.9);
             }
         }
 
         .n8n-chat-widget .chat-interface {
             display: flex;
             flex-direction: column;
-            height: calc(100% - 85px);
+            height: calc(100% - 97px);
         }
 
         .n8n-chat-widget .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
-            background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+            padding: 24px;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 50%);
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
             min-height: 0;
         }
 
         .n8n-chat-widget .chat-messages::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
 
         .n8n-chat-widget .chat-messages::-webkit-scrollbar-track {
@@ -165,29 +169,29 @@
         }
 
         .n8n-chat-widget .chat-messages::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, 0.12);
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
 
         .n8n-chat-widget .chat-messages::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.18);
         }
 
         .n8n-chat-widget .chat-message {
-            padding: 12px 16px;
-            border-radius: 18px;
-            max-width: 80%;
+            padding: 14px 18px;
+            border-radius: 20px;
+            max-width: 78%;
             word-wrap: break-word;
-            font-size: 14px;
-            line-height: 1.6;
-            animation: messagePop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 14.5px;
+            line-height: 1.65;
+            animation: messagePop 0.35s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
         }
 
         @keyframes messagePop {
             from {
                 opacity: 0;
-                transform: scale(0.92) translateY(8px);
+                transform: scale(0.9) translateY(12px);
             }
             to {
                 opacity: 1;
@@ -199,101 +203,155 @@
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             align-self: flex-end;
-            box-shadow: 0 2px 12px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 3px 14px rgba(99, 102, 241, 0.28);
             border: none;
-            border-radius: 18px 18px 4px 18px;
+            border-radius: 20px 20px 4px 20px;
         }
 
         .n8n-chat-widget .chat-message.bot {
             background: white;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.07);
             color: var(--chat--color-font);
             align-self: flex-start;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border-radius: 18px 18px 18px 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+            border-radius: 20px 20px 20px 4px;
+        }
+
+        .n8n-chat-widget .typing-indicator {
+            padding: 14px 18px;
+            border-radius: 20px 20px 20px 4px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+            align-self: flex-start;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            max-width: 70px;
+            animation: messagePop 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .n8n-chat-widget .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
+            animation: typingBounce 1.4s infinite;
+            opacity: 0.6;
+        }
+
+        .n8n-chat-widget .typing-indicator span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .n8n-chat-widget .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .n8n-chat-widget .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingBounce {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
         }
 
         .n8n-chat-widget .chat-input {
-            padding: 16px 20px 20px;
+            padding: 18px 24px 22px;
             background: var(--chat--color-background);
             border-top: 1px solid rgba(0, 0, 0, 0.06);
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: flex-end;
             flex-shrink: 0;
         }
 
         .n8n-chat-widget .chat-input textarea {
             flex: 1;
-            padding: 12px 16px;
-            border: 1.5px solid rgba(0, 0, 0, 0.1);
-            border-radius: 16px;
-            background: #fafafa;
+            padding: 14px 18px;
+            border: 1.5px solid rgba(0, 0, 0, 0.09);
+            border-radius: 18px;
+            background: #f8f9fa;
             color: var(--chat--color-font);
             resize: none;
             font-family: inherit;
-            font-size: 14px;
-            max-height: 80px;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 14.5px;
+            max-height: 90px;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            line-height: 1.5;
         }
 
         .n8n-chat-widget .chat-input textarea:focus {
             outline: none;
             border-color: var(--chat--color-primary);
             background: var(--chat--color-background);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
         .n8n-chat-widget .chat-input textarea::placeholder {
             color: var(--chat--color-font);
-            opacity: 0.45;
+            opacity: 0.42;
         }
 
         .n8n-chat-widget .chat-input button {
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             border: none;
-            border-radius: 12px;
-            width: 44px;
-            height: 44px;
+            border-radius: 14px;
+            width: 48px;
+            height: 48px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             font-family: inherit;
             font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
         }
 
         .n8n-chat-widget .chat-input button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
         }
 
         .n8n-chat-widget .chat-input button:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
+        }
+
+        .n8n-chat-widget .chat-input button svg {
+            width: 22px;
+            height: 22px;
         }
 
         .n8n-chat-widget .chat-toggle {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 64px;
-            height: 64px;
+            width: 68px;
+            height: 68px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3), 0 0 0 0 rgba(99, 102, 241, 0.4);
+            box-shadow: 
+                0 10px 30px rgba(99, 102, 241, 0.35),
+                0 0 0 0 rgba(99, 102, 241, 0);
             z-index: 999;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: float 3s ease-in-out infinite;
+            animation: float 3.5s ease-in-out infinite;
         }
 
         @keyframes float {
@@ -301,13 +359,15 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-6px);
+                transform: translateY(-8px);
             }
         }
 
         .n8n-chat-widget .chat-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4), 0 0 0 8px rgba(99, 102, 241, 0.1);
+            transform: scale(1.12) translateY(-2px);
+            box-shadow: 
+                0 14px 40px rgba(99, 102, 241, 0.45),
+                0 0 0 10px rgba(99, 102, 241, 0.1);
         }
 
         .n8n-chat-widget .chat-toggle.position-left {
@@ -316,15 +376,15 @@
         }
 
         .n8n-chat-widget .chat-toggle svg {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             fill: currentColor;
         }
 
         .n8n-chat-widget .chat-footer {
-            padding: 10px;
+            padding: 12px;
             text-align: center;
-            background: var(--chat--color-background);
+            background: #f8f9fa;
             border-top: 1px solid rgba(0, 0, 0, 0.06);
             flex-shrink: 0;
         }
@@ -332,34 +392,35 @@
         .n8n-chat-widget .chat-footer a {
             color: var(--chat--color-primary);
             text-decoration: none;
-            font-size: 11px;
-            opacity: 0.6;
-            transition: opacity 0.2s;
+            font-size: 11.5px;
+            opacity: 0.65;
+            transition: all 0.25s;
             font-family: inherit;
             font-weight: 500;
         }
 
         .n8n-chat-widget .chat-footer a:hover {
-            opacity: 0.9;
+            opacity: 0.95;
+            text-decoration: underline;
         }
 
         /* Mobile Responsive */
         @media (max-width: 480px) {
             .n8n-chat-widget .chat-container {
-                width: calc(100vw - 32px);
-                height: calc(100vh - 120px);
-                bottom: 16px;
-                right: 16px;
-                border-radius: 20px;
+                width: calc(100vw - 24px);
+                height: calc(100vh - 100px);
+                bottom: 12px;
+                right: 12px;
+                border-radius: 24px;
             }
 
             .n8n-chat-widget .chat-container.position-left {
-                left: 16px;
+                left: 12px;
             }
 
             .n8n-chat-widget .chat-toggle {
-                width: 56px;
-                height: 56px;
+                width: 60px;
+                height: 60px;
                 bottom: 20px;
                 right: 20px;
             }
@@ -367,13 +428,18 @@
             .n8n-chat-widget .chat-toggle.position-left {
                 left: 20px;
             }
+
+            .n8n-chat-widget .chat-toggle svg {
+                width: 26px;
+                height: 26px;
+            }
         }
     `;
 
-    // Load Geist font
+    // Load Inter font
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = 'https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap';
     document.head.appendChild(fontLink);
 
     // Inject styles
@@ -481,6 +547,15 @@
         return crypto.randomUUID();
     }
 
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.innerHTML = '<span></span><span></span><span></span>';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        return typingDiv;
+    }
+
     function startNewConversation() {
         currentSessionId = generateUUID();
         
@@ -510,6 +585,9 @@
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
         textarea.value = '';
 
+        // Show typing indicator
+        const typingIndicator = showTypingIndicator();
+
         try {
             console.log('Sending fetch request...');
             const response = await fetch(config.webhook.url, {
@@ -535,6 +613,9 @@
                 console.log('Response is not JSON, using as text');
                 data = { output: responseText };
             }
+            
+            // Remove typing indicator
+            typingIndicator.remove();
             
             const botMessageDiv = document.createElement('div');
             botMessageDiv.className = 'chat-message bot';
@@ -571,6 +652,9 @@
             console.error('Error Type:', error.name);
             console.error('Error Message:', error.message);
             console.error('Full Error:', error);
+            
+            // Remove typing indicator
+            typingIndicator.remove();
             
             const errorDiv = document.createElement('div');
             errorDiv.className = 'chat-message bot';
