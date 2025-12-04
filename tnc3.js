@@ -131,7 +131,7 @@
             padding: 20px 24px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             position: relative;
             flex-shrink: 0;
@@ -402,6 +402,16 @@
             align-items: center;
             justify-content: center;
             -webkit-tap-highlight-color: transparent;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .n8n-chat-widget .chat-toggle:hover {
