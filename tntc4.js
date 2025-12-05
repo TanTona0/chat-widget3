@@ -131,7 +131,7 @@
             padding: 20px 24px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             position: relative;
             flex-shrink: 0;
@@ -169,13 +169,14 @@
         }
 
         .n8n-chat-widget .brand-header img {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             object-fit: cover;
             flex-shrink: 0;
             background: white;
-            padding: 2px;
+            padding: 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .n8n-chat-widget .brand-info {
@@ -187,11 +188,11 @@
         }
 
         .n8n-chat-widget .brand-name {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 19px;
+            font-weight: 700;
             color: white;
             line-height: 1.2;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
         }
 
         .n8n-chat-widget .brand-status {
@@ -263,12 +264,12 @@
         }
 
         .n8n-chat-widget .chat-message {
-            padding: 12px 16px;
-            border-radius: 18px;
+            padding: 13px 17px;
+            border-radius: 20px;
             max-width: 75%;
             word-wrap: break-word;
             word-break: break-word;
-            font-size: 14.5px;
+            font-size: 15px;
             line-height: 1.5;
             animation: messageFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
@@ -289,17 +290,17 @@
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             align-self: flex-end;
-            border-bottom-right-radius: 5px;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+            border-bottom-right-radius: 6px;
+            box-shadow: 0 3px 12px rgba(37, 99, 235, 0.3);
         }
 
         .n8n-chat-widget .chat-message.bot {
             background: white;
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             color: var(--chat--color-font);
             align-self: flex-start;
-            border-bottom-left-radius: 5px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border-bottom-left-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .n8n-chat-widget .chat-input-wrapper {
@@ -354,9 +355,9 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
@@ -364,7 +365,7 @@
             justify-content: center;
             flex-shrink: 0;
             -webkit-tap-highlight-color: transparent;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
         }
 
         .n8n-chat-widget .chat-input button:hover {
@@ -377,8 +378,8 @@
         }
 
         .n8n-chat-widget .chat-input button svg {
-            width: 20px;
-            height: 20px;
+            width: 21px;
+            height: 21px;
             fill: currentColor;
         }
 
@@ -386,16 +387,16 @@
             position: fixed;
             bottom: 24px;
             right: 24px;
-            width: 64px;
-            height: 64px;
+            width: 68px;
+            height: 68px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             border: none;
             cursor: pointer;
             box-shadow: 
-                0 6px 20px rgba(37, 99, 235, 0.3),
-                0 2px 6px rgba(0, 0, 0, 0.1);
+                0 8px 24px rgba(37, 99, 235, 0.35),
+                0 4px 8px rgba(0, 0, 0, 0.15);
             z-index: 9998;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
@@ -431,8 +432,8 @@
         }
 
         .n8n-chat-widget .chat-toggle svg {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             fill: currentColor;
             transition: transform 0.3s;
         }
