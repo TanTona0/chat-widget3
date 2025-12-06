@@ -1,4 +1,4 @@
-// Chat Widget Script - Responsive with Typing Animation
+// Chat Widget Script - Bubbly Design
 (function() {
     // Create and inject styles
     const styles = `
@@ -12,14 +12,12 @@
 
         .n8n-chat-widget .chat-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             z-index: 1000;
             display: none;
             width: 420px;
             height: 650px;
-            max-width: calc(100vw - 40px);
-            max-height: calc(100vh - 40px);
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             border-radius: 32px;
             box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25);
@@ -29,17 +27,18 @@
             animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* Mobile styles */
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .n8n-chat-widget .chat-container {
                 bottom: 0;
                 right: 0;
                 left: 0;
+                top: 0;
                 width: 100%;
                 height: 100%;
+                border-radius: 0;
                 max-width: 100%;
                 max-height: 100%;
-                border-radius: 0;
             }
         }
 
@@ -56,7 +55,7 @@
 
         .n8n-chat-widget .chat-container.position-left {
             right: auto;
-            left: 20px;
+            left: 30px;
         }
 
         @media (max-width: 768px) {
@@ -71,26 +70,24 @@
         }
 
         .n8n-chat-widget .brand-header {
-            padding: 20px;
+            padding: 24px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             position: relative;
             border-radius: 32px 32px 0 0;
-            flex-shrink: 0;
         }
 
         @media (max-width: 768px) {
             .n8n-chat-widget .brand-header {
-                padding: 16px;
                 border-radius: 0;
             }
         }
 
         .n8n-chat-widget .close-button {
             position: absolute;
-            right: 16px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.2);
@@ -117,41 +114,22 @@
         }
 
         .n8n-chat-widget .brand-header img {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
             object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 768px) {
-            .n8n-chat-widget .brand-header img {
-                width: 40px;
-                height: 40px;
-            }
         }
 
         .n8n-chat-widget .brand-info {
             display: flex;
             flex-direction: column;
             gap: 2px;
-            flex: 1;
-            min-width: 0;
         }
 
         .n8n-chat-widget .brand-header span {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: white;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (max-width: 768px) {
-            .n8n-chat-widget .brand-header span {
-                font-size: 16px;
-            }
         }
 
         .n8n-chat-widget .brand-status {
@@ -171,7 +149,6 @@
             border-radius: 50%;
             display: inline-block;
             animation: pulse 2s ease-in-out infinite;
-            flex-shrink: 0;
         }
 
         @keyframes pulse {
@@ -186,27 +163,18 @@
         .n8n-chat-widget .chat-interface {
             display: flex;
             flex-direction: column;
-            height: calc(100% - 84px);
-            flex: 1;
-            min-height: 0;
+            height: calc(100% - 92px);
         }
 
         .n8n-chat-widget .chat-messages {
             flex: 1;
             overflow-y: auto;
-            overflow-x: hidden;
-            padding: 20px;
+            padding: 24px;
             background: var(--chat--color-background);
             display: flex;
             flex-direction: column;
             gap: 12px;
             min-height: 0;
-        }
-
-        @media (max-width: 768px) {
-            .n8n-chat-widget .chat-messages {
-                padding: 16px;
-            }
         }
 
         .n8n-chat-widget .chat-messages::-webkit-scrollbar {
@@ -236,13 +204,6 @@
             animation: messagePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        @media (max-width: 768px) {
-            .n8n-chat-widget .chat-message {
-                max-width: 90%;
-                font-size: 15px;
-            }
-        }
-
         @keyframes messagePop {
             from {
                 opacity: 0;
@@ -270,7 +231,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
-        /* Typing indicator */
+        /* Typing indicator animation */
         .n8n-chat-widget .typing-indicator {
             padding: 12px 16px;
             border-radius: 20px;
@@ -278,6 +239,7 @@
             align-self: flex-start;
             background: #f3f4f6;
             border: 1px solid rgba(99, 102, 241, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             display: flex;
             gap: 4px;
             align-items: center;
@@ -317,19 +279,13 @@
         }
 
         .n8n-chat-widget .chat-input {
-            padding: 16px 20px;
+            padding: 20px;
             background: var(--chat--color-background);
             border-top: 1px solid rgba(99, 102, 241, 0.08);
             display: flex;
             gap: 12px;
             align-items: flex-end;
             flex-shrink: 0;
-        }
-
-        @media (max-width: 768px) {
-            .n8n-chat-widget .chat-input {
-                padding: 12px 16px;
-            }
         }
 
         .n8n-chat-widget .chat-input textarea {
@@ -342,15 +298,13 @@
             resize: none;
             font-family: inherit;
             font-size: 14px;
-            max-height: 120px;
+            max-height: 80px;
             transition: all 0.2s;
-            min-height: 44px;
         }
 
         @media (max-width: 768px) {
             .n8n-chat-widget .chat-input textarea {
-                font-size: 16px; /* Prevents zoom on iOS */
-                min-height: 48px;
+                font-size: 16px;
             }
         }
 
@@ -371,8 +325,8 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             transition: all 0.2s;
             font-family: inherit;
@@ -382,13 +336,6 @@
             justify-content: center;
             flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .n8n-chat-widget .chat-input button {
-                width: 48px;
-                height: 48px;
-            }
         }
 
         .n8n-chat-widget .chat-input button:hover {
@@ -402,10 +349,10 @@
 
         .n8n-chat-widget .chat-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
@@ -418,15 +365,6 @@
             align-items: center;
             justify-content: center;
             animation: float 3s ease-in-out infinite;
-        }
-
-        @media (max-width: 768px) {
-            .n8n-chat-widget .chat-toggle {
-                width: 56px;
-                height: 56px;
-                bottom: 16px;
-                right: 16px;
-            }
         }
 
         @keyframes float {
@@ -445,30 +383,17 @@
 
         .n8n-chat-widget .chat-toggle.position-left {
             right: auto;
-            left: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .n8n-chat-widget .chat-toggle.position-left {
-                left: 16px;
-            }
+            left: 30px;
         }
 
         .n8n-chat-widget .chat-toggle svg {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             fill: currentColor;
         }
 
-        @media (max-width: 768px) {
-            .n8n-chat-widget .chat-toggle svg {
-                width: 24px;
-                height: 24px;
-            }
-        }
-
         .n8n-chat-widget .chat-footer {
-            padding: 10px 12px;
+            padding: 12px;
             text-align: center;
             background: #f9fafb;
             border-top: 1px solid rgba(99, 102, 241, 0.08);
@@ -479,7 +404,6 @@
         @media (max-width: 768px) {
             .n8n-chat-widget .chat-footer {
                 border-radius: 0;
-                padding: 12px;
             }
         }
 
@@ -644,9 +568,6 @@
         messagesContainer.appendChild(userMessageDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
         textarea.value = '';
-        
-        // Auto-resize textarea back to original height
-        textarea.style.height = 'auto';
 
         // Show typing indicator
         const typingIndicator = createTypingIndicator();
@@ -698,9 +619,10 @@
             
             // Format the text: convert \n to <br> and handle bullets
             botText = botText
-                .replace(/\\n/g, '\n')
+                .replace(/\\n/g, '\n')  // Convert literal \n to actual newlines
                 .split('\n')
                 .map(line => {
+                    // Convert lines starting with * to formatted items
                     if (line.trim().startsWith('*')) {
                         return `<span style="display: block; padding-left: 8px; margin: 4px 0;">• ${line.trim().substring(1).trim()}</span>`;
                     }
@@ -718,7 +640,7 @@
             console.error('Error Message:', error.message);
             console.error('Full Error:', error);
             
-            // Remove typing indicator
+            // Remove typing indicator on error
             typingIndicator.remove();
             
             const errorDiv = document.createElement('div');
@@ -729,21 +651,11 @@
         }
     }
 
-    // Auto-resize textarea
-    textarea.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-    });
-
     // Event listeners
     toggleButton.addEventListener('click', () => {
         chatContainer.classList.toggle('open');
-        if (chatContainer.classList.contains('open')) {
-            if (messagesContainer.children.length === 0) {
-                startNewConversation();
-            }
-            // Focus textarea on mobile after a short delay
-            setTimeout(() => textarea.focus(), 300);
+        if (chatContainer.classList.contains('open') && messagesContainer.children.length === 0) {
+            startNewConversation();
         }
     });
 
@@ -767,24 +679,4 @@
             }
         }
     });
-
-    // Prevent body scroll when chat is open on mobile
-    const style = document.createElement('style');
-    style.textContent = `
-        @media (max-width: 768px) {
-            body.chat-open {
-                overflow: hidden;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-
-    toggleButton.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-            document.body.classList.toggle('chat-open');
-        }
-    });
-
-    closeBtn.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-            document.body.classList.remove('chat-open');
+})();
