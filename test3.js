@@ -1,4 +1,4 @@
-// Modern Chat Widget - Premium Design with Floating Button
+// Modern Chat Widget - Premium Design
 (function() {
     if (window.N8NChatWidgetInitialized) return;
     window.N8NChatWidgetInitialized = true;
@@ -290,45 +290,32 @@
         }
         .n8n-chat-widget .chat-toggle {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 70px;
-            height: 70px;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35), 0 4px 12px rgba(0, 0, 0, 0.1);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            animation: floatButton 3s ease-in-out infinite;
-        }
-        @keyframes floatButton {
-            0%, 100% { 
-                transform: translateY(0px) scale(1);
-                box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
-            }
-            50% { 
-                transform: translateY(-10px) scale(1.05);
-                box-shadow: 0 16px 32px rgba(99, 102, 241, 0.5), 0 8px 20px rgba(0, 0, 0, 0.2);
-            }
         }
         .n8n-chat-widget .chat-toggle:hover {
-            transform: scale(1.15) translateY(-5px) !important;
-            box-shadow: 0 16px 40px rgba(99, 102, 241, 0.6), 0 8px 24px rgba(0, 0, 0, 0.25) !important;
-            animation-play-state: paused;
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.45), 0 6px 16px rgba(0, 0, 0, 0.15);
         }
         .n8n-chat-widget .chat-toggle:active {
-            transform: scale(1.0) !important;
+            transform: scale(1.0);
         }
         .n8n-chat-widget .chat-toggle svg {
-            width: 32px;
-            height: 32px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            width: 24px;
+            height: 24px;
         }
         .n8n-chat-widget .chat-footer {
             padding: 10px;
@@ -353,6 +340,16 @@
             }
             .n8n-chat-widget .chat-footer {
                 border-radius: 0;
+            }
+            .n8n-chat-widget .chat-toggle {
+                width: 52px;
+                height: 52px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .n8n-chat-widget .chat-toggle svg {
+                width: 22px;
+                height: 22px;
             }
         }
     `;
@@ -421,11 +418,8 @@
             </div>
         </div>
         <button class="chat-toggle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                <circle cx="9" cy="10" r="1" fill="currentColor"/>
-                <circle cx="15" cy="10" r="1" fill="currentColor"/>
-                <path d="M9 14a5 5 0 0 0 6 0"/>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
             </svg>
         </button>
     `;
@@ -516,8 +510,10 @@
             const data = await response.json();
             typing.remove();
             
+            // Extract bot text from nested response structure
             let botText = '';
             
+            // Try multiple possible response structures
             if (data.output) {
                 botText = data.output;
             } else if (data.message) {
@@ -527,9 +523,11 @@
             } else if (Array.isArray(data) && data[0]?.output) {
                 botText = data[0].output;
             } else {
+                // Fallback: stringify the entire response
                 botText = JSON.stringify(data);
             }
             
+            // If botText is still a stringified JSON, try to parse it
             if (typeof botText === 'string' && (botText.startsWith('[{') || botText.startsWith('{'))) {
                 try {
                     const parsed = JSON.parse(botText);
@@ -538,9 +536,12 @@
                     } else if (parsed.output) {
                         botText = parsed.output;
                     }
-                } catch (e) {}
+                } catch (e) {
+                    // If parsing fails, continue with the original text
+                }
             }
             
+            // Clean up escape characters and formatting
             botText = String(botText)
                 .replace(/\\n/g, '\n')
                 .replace(/\\"/g, '"')
