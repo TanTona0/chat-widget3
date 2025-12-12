@@ -364,7 +364,7 @@
             logo: 'https://via.placeholder.com/44',
             name: 'Chat Assistant',
             welcomeText: 'مرحبًا 👋، كيف يمكنني مساعدتك؟',
-            poweredBy: { text: 'Powered by AI', link: '#' }
+            poweredBy: { text: 'Powered by TanT', link: 'https://wa.me/966590400850' }
         },
         style: { primaryColor: '#6366f1', secondaryColor: '#8b5cf6', backgroundColor: '#ffffff', fontColor: '#1f2937' }
     };
