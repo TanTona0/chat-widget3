@@ -351,12 +351,12 @@
     const defaultConfig = {
         webhook: { url: '', route: '' },
         branding: {
-            logo: 'https://image.similarpng.com/file/similarpng/very-thumbnail/2021/09/Olive-oil-logo-design-on-transparent-background-PNG.png',
-            name: 'Oliye',
+            logo: 'https://via.placeholder.com/44',
+            name: 'Chat Assistant',
             welcomeText: 'مرحبًا 👋، كيف يمكنني مساعدتك؟',
-            poweredBy: { text: 'Powered by TanT.AI', link: 'https://tant.manus.space' }
+            poweredBy: { text: 'Powered by AI', link: '#' }
         },
-        style: { primaryColor: '#5f720f', secondaryColor: '#5f720f', backgroundColor: '#ffffff', fontColor: '#1f2937' }
+        style: { primaryColor: '#6366f1', secondaryColor: '#8b5cf6', backgroundColor: '#ffffff', fontColor: '#1f2937' }
     };
 
     const config = window.ChatWidgetConfig ? 
@@ -388,7 +388,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
                     </svg>
-                    مسح
+                    مسح السجل
                 </button>
                 <button class="close-button">×</button>
             </div>
@@ -501,6 +501,15 @@
             typing.remove();
             
             let botText = data.output || data.message || data.text || JSON.stringify(data);
+            
+            // Clean up the bot response from code artifacts
+            botText = botText
+                .replace(/\[{"output":"?/g, '')
+                .replace(/"?\}\]/g, '')
+                .replace(/\\"/g, '"')
+                .replace(/\\\\/g, '\\')
+                .trim();
+            
             addMessage(botText, 'bot');
         } catch (error) {
             typing.remove();
