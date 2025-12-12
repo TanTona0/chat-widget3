@@ -13,18 +13,18 @@
         }
         .n8n-chat-widget .chat-container {
             position: fixed;
-            bottom: 24px;
+            bottom: 100px;
             right: 24px;
             z-index: 10000;
             display: none;
             width: 400px;
             height: 600px;
             background: var(--chat--color-background);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 32px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
         @media (max-width: 768px) {
             .n8n-chat-widget .chat-container {
@@ -58,9 +58,9 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .n8n-chat-widget .brand-header img {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
@@ -106,9 +106,9 @@
             border: none;
             color: white;
             cursor: pointer;
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             font-size: 20px;
             transition: all 0.2s ease;
             display: flex;
@@ -117,14 +117,14 @@
         }
         .n8n-chat-widget .close-button:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-50%) scale(1.05);
+            transform: translateY(-50%) scale(1.08);
         }
         .n8n-chat-widget .close-button:active {
             transform: translateY(-50%) scale(0.95);
         }
         .n8n-chat-widget .clear-chat-button {
             position: absolute;
-            left: 56px;
+            left: 60px;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.15);
@@ -132,8 +132,8 @@
             border: none;
             color: white;
             cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 10px;
+            padding: 8px 14px;
+            border-radius: 24px;
             font-size: 13px;
             font-weight: 500;
             display: flex;
@@ -143,10 +143,10 @@
         }
         .n8n-chat-widget .clear-chat-button:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-50%) scale(1.02);
+            transform: translateY(-50%) scale(1.03);
         }
         .n8n-chat-widget .clear-chat-button:active {
-            transform: translateY(-50%) scale(0.98);
+            transform: translateY(-50%) scale(0.97);
         }
         .n8n-chat-widget .clear-chat-button svg {
             width: 14px;
@@ -180,8 +180,8 @@
             background: rgba(0, 0, 0, 0.18);
         }
         .n8n-chat-widget .chat-message {
-            padding: 12px 16px;
-            border-radius: 16px;
+            padding: 14px 18px;
+            border-radius: 24px;
             max-width: 80%;
             font-size: 14px;
             line-height: 1.5;
@@ -196,27 +196,27 @@
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             align-self: flex-end;
-            box-shadow: 0 2px 12px rgba(99, 102, 241, 0.2);
-            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+            border-bottom-right-radius: 8px;
         }
         .n8n-chat-widget .chat-message.bot {
             background: white;
             color: var(--chat--color-font);
             align-self: flex-start;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-bottom-left-radius: 8px;
         }
         .n8n-chat-widget .typing-indicator {
-            padding: 14px 16px;
-            border-radius: 16px;
+            padding: 16px 18px;
+            border-radius: 24px;
             background: white;
             align-self: flex-start;
             display: flex;
             gap: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-bottom-left-radius: 8px;
         }
         .n8n-chat-widget .typing-indicator span {
             width: 8px;
@@ -242,9 +242,9 @@
         }
         .n8n-chat-widget .chat-input textarea {
             flex: 1;
-            padding: 12px 16px;
+            padding: 14px 18px;
             border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 14px;
+            border-radius: 24px;
             background: #fafafa;
             resize: none;
             font-size: 14px;
@@ -266,9 +266,9 @@
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             border: none;
-            border-radius: 14px;
-            width: 44px;
-            height: 44px;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -282,7 +282,7 @@
             height: 20px;
         }
         .n8n-chat-widget .chat-input button:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
             box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
         }
         .n8n-chat-widget .chat-input button:active {
@@ -292,14 +292,14 @@
             position: fixed;
             bottom: 24px;
             right: 24px;
-            width: 64px;
-            height: 64px;
-            border-radius: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
             background: linear-gradient(135deg, var(--chat--color-primary) 0%, var(--chat--color-secondary) 100%);
             color: white;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35), 0 4px 12px rgba(0, 0, 0, 0.1);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -307,11 +307,11 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .n8n-chat-widget .chat-toggle:hover {
-            transform: scale(1.08) translateY(-2px);
-            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.45), 0 6px 16px rgba(0, 0, 0, 0.15);
         }
         .n8n-chat-widget .chat-toggle:active {
-            transform: scale(0.96);
+            transform: scale(1.0);
         }
         .n8n-chat-widget .chat-toggle svg {
             width: 28px;
@@ -500,14 +500,43 @@
             const data = await response.json();
             typing.remove();
             
-            let botText = data.output || data.message || data.text || JSON.stringify(data);
+            // Extract bot text from nested response structure
+            let botText = '';
             
-            // Clean up the bot response from code artifacts
-            botText = botText
-                .replace(/\[{"output":"?/g, '')
-                .replace(/"?\}\]/g, '')
+            // Try multiple possible response structures
+            if (data.output) {
+                botText = data.output;
+            } else if (data.message) {
+                botText = data.message;
+            } else if (data.text) {
+                botText = data.text;
+            } else if (Array.isArray(data) && data[0]?.output) {
+                botText = data[0].output;
+            } else {
+                // Fallback: stringify the entire response
+                botText = JSON.stringify(data);
+            }
+            
+            // If botText is still a stringified JSON, try to parse it
+            if (typeof botText === 'string' && (botText.startsWith('[{') || botText.startsWith('{'))) {
+                try {
+                    const parsed = JSON.parse(botText);
+                    if (Array.isArray(parsed) && parsed[0]?.output) {
+                        botText = parsed[0].output;
+                    } else if (parsed.output) {
+                        botText = parsed.output;
+                    }
+                } catch (e) {
+                    // If parsing fails, continue with the original text
+                }
+            }
+            
+            // Clean up escape characters and formatting
+            botText = String(botText)
+                .replace(/\\n/g, '\n')
                 .replace(/\\"/g, '"')
                 .replace(/\\\\/g, '\\')
+                .replace(/\\t/g, '\t')
                 .trim();
             
             addMessage(botText, 'bot');
